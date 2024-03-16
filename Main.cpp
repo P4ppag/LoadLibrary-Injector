@@ -82,6 +82,7 @@ int main(int argc, char* argv[])
 	else
 	{
 		bool id = true;
+		// Check if 1st argument is a process id or process name
 		for (char c : std::string(argv[1]))
 		{
 			if (!isdigit(c))
@@ -91,6 +92,7 @@ int main(int argc, char* argv[])
 			}
 		}
 
+		// atoi turns a string to numbers
 		processId = id ? atoi(argv[1]) : GetProcessId(argv[1]);
 		dllPath = argv[2];
 	}
@@ -104,6 +106,7 @@ int main(int argc, char* argv[])
 	LOG("[+] Got Full Path of DLL!");
 	LOG(dllPath);
 
+	// Opening a handle to our target process
 	hProc = OpenProcess(PROCESS_ALL_ACCESS, false, processId);
 	if (!hProc)
 	{
